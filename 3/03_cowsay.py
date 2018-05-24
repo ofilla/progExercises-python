@@ -29,10 +29,7 @@ def get_tosay():
     if len(argv) > 1:
         return argv[1]
     
-    return get_input("What shall the cow say?")
-
-def get_input(question):
-    got = raw_input(question + "\n> ")
+    got = raw_input("What shall the cow say?\n> ")
     print
     return got
 
