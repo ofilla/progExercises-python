@@ -1,29 +1,34 @@
-to_buy = [
-            ('Wurst', 1),
-            ('Kaese', 1),
-            ('Brot', 1),
-            ('DVD', 2)
-        ]
+products = ['Wurst', 'Kaese', 'Brot', 'DVD']
 
-prices = {
-            'Wurst': 4.20,
-            'Kaese': 2.30,
-            'Brot': 2.10,
-            'DVD': 12.00
+numbers_to_buy = [1, 1, 1, 2]
+
+products_prices = {
+            'Wurst': 4.2,
+            'Kaese': 2.3,
+            'Brot': 2.1,
+            'DVD': 12
         }
 
-def pricestring(price):
-    return '{0:5.2f} EUR'.format(price)
+prices = []
+for i in range(len(products)):
+    total = numbers_to_buy[i] * products_prices[products[i]]
+    prices.append(total)
 
-for product, number in to_buy:
-    price = prices[product]
-    s = product + '\t'
-    s += str(number) + ' x '
-    s += pricestring(price)
-    print s
+# get correct price format
+# shall be right-padded price
+maxprice = max(prices)
+maxprice_field_length = len('{0:5.2f}'.format(maxprice))
+pricestring_format = '{}.2f'.format(maxprice_field_length)
+pricestring_format = '{0:' + pricestring_format + '} EUR'
+def pricestring(price):
+    return pricestring_format.format(price)
+
+for i in range(len(products)):
+    product = products[i]
+    number = numbers_to_buy[i]
+    price = products_prices[product]
     
-    total = number * price
-    euro = int(total)
-    cent = int((total - euro) * 100)
-    s = str(euro) + '.' + str(cent)
-    print "\t\t\t" + pricestring(total)
+    s = product + '\t'
+    s += str(number) + ' x ' + pricestring(price)
+    print s
+    print "\t\t\t" + pricestring(number * price)
