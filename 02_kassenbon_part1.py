@@ -1,7 +1,7 @@
 # input parameter
 products = ['Wurst', 'Kaese', 'Brot', 'DVD']
 numbers_to_buy = [1, 1, 1, 2]
-wallet = {50: 2}
+wallet = {50: 1}
 
 products_prices = {
     'Wurst': 4.2,
@@ -42,14 +42,22 @@ print 'Gesamt                  ' + pricestring(total)
 # what is given?
 given = 0
 rest = total
-while given < total:
+while rest > 0:
     # bills only, coins are not implemented
     for bill in (500, 200, 100, 50, 20, 10, 5):
         if wallet.get(bill, 0) > 0:
             # wallet contains at least one of this kind of bill
+            wallet[bill] -= 1
             given += bill # pay
             rest = total - given
-                
-print 'Gegeben                 ' + pricestring(given)
-print
-print 'Zurueck                 ' + pricestring(- rest)
+            break
+    if bill == 5:
+        # wallet is empty
+        print
+        print "not enough money to buy all items"
+        break
+
+if rest <= 0:
+    print 'Gegeben                 ' + pricestring(given)
+    print
+    print 'Zurueck                 ' + pricestring(- rest)
