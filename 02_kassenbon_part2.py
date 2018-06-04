@@ -1,5 +1,5 @@
 # input parameter
-item = 'DVD'
+item = 'Wurst'
 wallet = {50: 1}
 
 products_prices = {
