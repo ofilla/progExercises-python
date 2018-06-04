@@ -1,8 +1,8 @@
+# input parameter
 products = ['Wurst', 'Kaese', 'Brot', 'DVD']
 numbers_to_buy = [1, 1, 1, 2]
+wallet = {50: 2}
 
-
-preceeding_spaces = " "*24 # 24 = 3*\t
 products_prices = {
     'Wurst': 4.2,
     'Kaese': 2.3,
@@ -11,6 +11,7 @@ products_prices = {
 }
     
 # init
+preceeding_spaces = " "*24 # 24 = 3*\t
 maxprice = 0
 total = 0
 bon = []
@@ -37,7 +38,18 @@ print '-' * len(preceeding_spaces + pricestring(maxprice))
 
 # lower part
 print 'Gesamt                  ' + pricestring(total)
-print 'Gegeben                 ' + pricestring(50)
 
+# what is given?
+given = 0
+rest = total
+while given < total:
+    # bills only, coins are not implemented
+    for bill in (500, 200, 100, 50, 20, 10, 5):
+        if wallet.get(bill, 0) > 0:
+            # wallet contains at least one of this kind of bill
+            given += bill # pay
+            rest = total - given
+                
+print 'Gegeben                 ' + pricestring(given)
 print
-print 'Zurueck                 ' + pricestring(50 - total)
+print 'Zurueck                 ' + pricestring(- rest)
